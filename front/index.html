@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencia de Viajes</title>
+</head>
+<body>
+    <h1>Agencia de Viajes - VuelaMás</h1>
+
+    <div>
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <button onclick="login()">Login</button>
+        <p id="tokenMessage"></p>
+    </div>
+
+    <div>
+        <h2>Consultar Vuelos Disponibles</h2>
+        <button onclick="getFlights()">Ver Vuelos</button>
+        <ul id="flightsList"></ul>
+    </div>
+
+    <div>
+        <h2>Reservar Vuelo</h2>
+        <input type="number" id="flightId" placeholder="ID del vuelo">
+        <button onclick="reserveFlight()">Reservar</button>
+        <p id="reservationMessage"></p>
+    </div>
+
+    <div>
+        <h2>Mis Reservas</h2>
+        <button onclick="getReservations()">Ver Mis Reservas</button>
+        <ul id="reservationsList"></ul>
+    </div>
+
+    <div>
+        <h2>Recomendaciones</h2>
+        <button onclick="getRecommendations()">Ver Recomendaciones</button>
+        <ul id="recommendationsList"></ul>
+    </div>
+
+    <script>
+        let token = "";
+
+        function login() {
+            const username = document.getElementById("username").value;
+            fetch("http://localhost:3000/login", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ username })
+            })
+            .then(res => res.json())
+            .then(data => {
+                token = data.token;
+                document.getElementById("tokenMessage").innerText = "Login exitoso. Token guardado.";
+            });
+        }
+
+        function getFlights() {
+            fetch("http://localhost:3000/flights", {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
+                let list = document.getElementById("flightsList");
+                list.innerHTML = "";
+                data.forEach(f => {
+                    let li = document.createElement("li");
+                    li.innerText = `ID: ${f.id} - Destino: ${f.destination} - Precio: $${f.price}`;
+                    list.appendChild(li);
+                });
+            });
+        }
+
+        function reserveFlight() {
+            const flightId = document.getElementById("flightId").value;
+            fetch("http://localhost:3000/reserve", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}`
+                },
+                body: JSON.stringify({ flightId: Number(flightId) })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById("reservationMessage").innerText = data.message;
+            });
+        }
+
+        function getReservations() {
+            fetch("http://localhost:3000/reservations", {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
+                let list = document.getElementById("reservationsList");
+                list.innerHTML = "";
+                data.forEach(r => {
+                    let li = document.createElement("li");
+                    li.innerText = `Vuelo a ${r.flight.destination}`;
+                    list.appendChild(li);
+                });
+            });
+        }
+
+        function getRecommendations() {
+            fetch("http://localhost:3000/recommendations", {
+                headers: { "Authorization": `Bearer ${token}` }
+            })
+            .then(res => res.json())
+            .then(data => {
+                let list = document.getElementById("recommendationsList");
+                list.innerHTML = "";
+                data.forEach(r => {
+                    let li = document.createElement("li");
+                    li.innerText = `Destino: ${r.destination} - Precio: $${r.price}`;
+                    list.appendChild(li);
+                });
+            });
+        }
+    </script>
+</body>
+</html>
