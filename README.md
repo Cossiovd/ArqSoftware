@@ -1,32 +1,54 @@
-1.	Se debe instalar Node.js, para luego seguir estos pasos
-Instalar Express y JWT
-Abre una terminal en la carpeta donde guardarás el proyecto y ejecuta:
+1️⃣ Instalación de Node.js
+Antes de comenzar, asegúrate de tener Node.js instalado en tu equipo. Puedes descargarlo desde nodejs.org.
+
+2️⃣ Instalación de Dependencias
+Abre una terminal en la carpeta donde guardarás el proyecto y ejecuta los siguientes comandos:
+
+sh
+Copiar
+Editar
 npm init -y
 npm install express jsonwebtoken body-parser cors
+Esto instalará las dependencias necesarias para la API.
 
-2.	Ejecutar la API REST
-Inicia el servidor ejecutando en la terminal:
+3️⃣ Ejecutar la API REST
+Para iniciar el servidor, ejecuta en la terminal:
+
+sh
+Copiar
+Editar
 node server.js
+Si todo está bien, verás el siguiente mensaje en la terminal:
 
-Si todo está bien, verás este mensaje en la terminal:
+nginx
+Copiar
+Editar
 API corriendo en http://localhost:3000
+4️⃣ Probar la API con Postman o cURL
+Puedes probar los endpoints usando Postman o cURL en la terminal.
 
-3.	Probar la API con Postman o cURL
-
-Probar los endpoints usando Postman o cURL en la terminal.
-•	iniciar sesión para obtener el token:
+📌 Iniciar sesión para obtener el token
+sh
+Copiar
+Editar
 curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d '{"username":"usuario1"}'
-Guardar el token de la respuesta.
-•	Ver vuelos disponibles (requiere token):
-curl -X GET http://localhost:3000/flights -H "Authorization: Bearer TU_TOKEN"
-•	Reservar un vuelo (ejemplo con ID = 1):
-curl -X POST http://localhost:3000/reserve -H "Authorization: Bearer TU_TOKEN" -H "Content-Type: application/json" -d '{"flightId":1}'
+📌 Guarda el token de la respuesta para las siguientes pruebas.
 
-4.	Probar la Interfaz Web
--	Abrir el archive index.html en el navegador
-o	Ahora, prueba:
-Iniciar sesión con cualquier usuario.
-Ver los vuelos disponibles.
-Reservar un vuelo.
-Consultar las reservas realizadas.
-Ver recomendaciones personalizadas.
+📌 Ver vuelos disponibles (requiere token)
+sh
+Copiar
+Editar
+curl -X GET http://localhost:3000/flights -H "Authorization: Bearer TU_TOKEN"
+📌 Reservar un vuelo (ejemplo con ID = 1)
+sh
+Copiar
+Editar
+curl -X POST http://localhost:3000/reserve -H "Authorization: Bearer TU_TOKEN" -H "Content-Type: application/json" -d '{"flightId":1}'
+5️⃣ Probar la Interfaz Web
+📌 Abrir el archivo index.html en el navegador y probar las siguientes funcionalidades:
+
+✅ Iniciar sesión con cualquier usuario.
+✅ Ver los vuelos disponibles.
+✅ Reservar un vuelo.
+✅ Consultar las reservas realizadas.
+✅ Ver recomendaciones personalizadas.
