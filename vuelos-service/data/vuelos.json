@@ -1,0 +1,14 @@
+[
+  {
+    "id": 101,
+    "origen": "Ciudad A",
+    "destino": "Ciudad B",
+    "fecha": "2025-04-06"
+  },
+  {
+    "id": 102,
+    "origen": "Ciudad C",
+    "destino": "Ciudad D",
+    "fecha": "2025-04-07"
+  }
+]
