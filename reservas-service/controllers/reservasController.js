@@ -3,39 +3,59 @@ const path = require('path');
 const axios = require('axios');
 const { check, validationResult } = require('express-validator');
 
-// Ruta del archivo de reservas
+// Ruta de archivo JSON
 const reservasPath = path.join(__dirname, '../data/reservas.json');
 
-// Obtener todas las reservas
-exports.getAllReservas = (req, res) => {
+exports.getAllReservas = async (req, res) => {
   const reservas = JSON.parse(fs.readFileSync(reservasPath, 'utf-8'));
-  res.json(reservas);
+
+  try {
+    const [vuelosRes, usersRes] = await Promise.all([
+      axios.get('http://localhost:3003/vuelos', {
+        headers: { Authorization: req.headers.authorization }
+      }),
+      axios.get('http://localhost:3001/auth/users', {
+        headers: { Authorization: req.headers.authorization }
+      })
+    ]);
+
+    const vuelos = vuelosRes.data;
+    const usuarios = usersRes.data;
+
+    const enriquecidas = reservas.map(r => {
+      const vuelo = vuelos.find(v => v.id == r.vueloId);
+      const usuario = usuarios.find(u => u.id == r.userId);
+
+      return {
+        ...r,
+        username: usuario ? usuario.username : 'Desconocido',
+        vuelo: vuelo || null
+      };
+    });
+
+    res.json(enriquecidas);
+  } catch (err) {
+    res.status(500).json({ message: 'Error al enriquecer reservas', error: err.message });
+  }
 };
 
-// Crear una nueva reserva
 exports.createReserva = async (req, res) => {
   const { userId, vueloId, fecha } = req.body;
 
-  // Validación básica de campos
   if (!userId || !vueloId || !fecha) {
     return res.status(400).json({ message: 'Todos los campos (userId, vueloId, fecha) son requeridos' });
   }
 
-  let vuelo;
-
   try {
     const response = await axios.get(`http://localhost:3003/vuelos/${vueloId}`, {
-      headers: {
-        Authorization: req.headers.authorization
-      }
+      headers: { Authorization: req.headers.authorization }
     });
 
-    vuelo = response.data;
+    const vuelo = response.data;
 
     if (vuelo.fecha !== fecha) {
       return res.status(400).json({ message: 'La fecha no coincide con la del vuelo' });
     }
-
   } catch (error) {
     if (error.response?.status === 404) {
       return res.status(400).json({ message: 'El vuelo no existe' });
@@ -47,32 +67,19 @@ exports.createReserva = async (req, res) => {
     });
   }
 
-  // Cargar reservas existentes
-  const reservasPath = path.join(__dirname, '../data/reservas.json');
   const reservas = JSON.parse(fs.readFileSync(reservasPath, 'utf-8'));
-
-  const newReserva = {
+  const nueva = {
     id: reservas.length + 1,
     userId,
     vueloId,
-    fecha,
-    vuelo: {
-      origen: vuelo.origen,
-      destino: vuelo.destino,
-      fecha: vuelo.fecha
-    }
+    fecha
   };
 
-  reservas.push(newReserva);
+  reservas.push(nueva);
   fs.writeFileSync(reservasPath, JSON.stringify(reservas, null, 2));
-
-  res.status(201).json({
-    message: 'Reserva creada exitosamente',
-    reserva: newReserva
-  });
+  res.status(201).json({ message: 'Reserva creada exitosamente', reserva: nueva });
 };
 
-// Middleware de validación con express-validator
 exports.validateReserva = [
   check('userId').notEmpty().withMessage('El userId es requerido'),
   check('vueloId').notEmpty().withMessage('El vueloId es requerido'),

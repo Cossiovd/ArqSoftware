@@ -29,5 +29,11 @@ const { validateLogin, validateRegister } = require('../controllers/authControll
  */
 router.post('/login', validateLogin, authController.login);
 router.post('/register', validateRegister, authController.register);
+const users = require('../data/users.json');
+router.get('/users', (req, res) => {
+  const sanitizedUsers = users.map(u => ({ id: u.id, username: u.username }));
+  res.json(sanitizedUsers);
+});
+
 
 module.exports = router;

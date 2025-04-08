@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Agencia de Viajes - VuelaMás</title>
-  <link rel="stylesheet" href="styles.css" />
+
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
@@ -16,14 +16,14 @@
     <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
     <input type="text" id="username" placeholder="Usuario" />
     <input type="password" id="password" placeholder="Contraseña" />
-    <button onclick="login()">Login</button>
+    <button id="loginBtn">Login</button>
     <p id="tokenMessage"></p>
   </div>
 
   <!-- Vuelos -->
   <div>
     <h2><i class="fas fa-plane-departure"></i> Consultar Vuelos Disponibles</h2>
-    <button onclick="getFlights()">Ver Vuelos</button>
+    <button id="getFlightsBtn">Ver Vuelos</button>
     <ul id="flightsList"></ul>
   </div>
 
@@ -32,14 +32,14 @@
     <h2><i class="fas fa-ticket-alt"></i> Reservar Vuelo</h2>
     <input type="number" id="flightId" placeholder="ID del vuelo" />
     <input type="date" id="flightDate" placeholder="Fecha del vuelo" />
-    <button onclick="reserveFlight()">Reservar</button>
+    <button id="reserveBtn">Reservar</button>
     <p id="reservationMessage"></p>
   </div>
 
   <!-- Ver Reservas -->
   <div>
     <h2><i class="fas fa-clipboard-list"></i> Mis Reservas</h2>
-    <button onclick="getReservations()">Ver Mis Reservas</button>
+    <button id="getReservationsBtn">Ver Mis Reservas</button>
     <ul id="reservationsList"></ul>
   </div>
 
@@ -59,6 +59,6 @@
   </div>
 
   <!-- Scripts -->
-  <script src="scripts.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
