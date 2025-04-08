@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "userId": 1,
+    "vueloId": 101,
+    "fecha": "2025-04-06"
+  },
+  {
+    "id": 2,
+    "userId": 2,
+    "vueloId": 102,
+    "fecha": "2025-04-07"
+  },
+  {
+    "id": 3,
+    "userId": 1,
+    "vueloId": 1,
+    "fecha": "2024-04-06"
+  }
+]

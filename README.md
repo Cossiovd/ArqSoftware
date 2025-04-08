@@ -1,39 +1,67 @@
-1️⃣ Instalación de Node.js
-Antes de comenzar, asegúrate de tener Node.js instalado en tu equipo. Puedes descargarlo desde nodejs.org.
+# 🧭 Proyecto: Plataforma de Microservicios `VuelaMás`
 
-2️⃣ Instalación de Dependencias
-Abre una terminal en la carpeta donde guardarás el proyecto y ejecuta los siguientes comandos:
+Este proyecto implementa una arquitectura basada en microservicios para una agencia de viajes. Incluye:
 
-npm init -y
-npm install express jsonwebtoken body-parser cors
-Esto instalará las dependencias necesarias para la API.
+- ✅ Servicio de autenticación (`auth-service`)
+- ✈️ Servicio de vuelos (`vuelos-service`)
+- 📄 Servicio de reservas (`reservas-service`)
+- 📚 Documentación Swagger para cada servicio
+- 🧵 Uso de `concurrently` para levantar todo con un solo comando
 
-3️⃣ Ejecutar la API REST
-Para iniciar el servidor, ejecuta en la terminal:
+## 📦 Instalación
+📌 `concurrently`, instálalo global o localmente:
 
-node server.js
-Si todo está bien, verás el siguiente mensaje en la terminal:
+```bash
+npm install concurrently --save-dev
+```
 
-API corriendo en http://localhost:3000
-4️⃣ Probar la API con Postman o cURL
-Puedes probar los endpoints usando Postman o cURL en la terminal.
+## ▶️ Ejecutar todos los servicios
 
-📌 Iniciar sesión para obtener el token
+Desde la raíz del proyecto, con el siguiente comando:
 
-curl -X POST http://localhost:3000/login -H "Content-Type: application/json" -d '{"username":"usuario1"}'
-📌 Guarda el token de la respuesta para las siguientes pruebas.
+```bash
+npm start
+```
 
-📌 Ver vuelos disponibles (requiere token)
+Este comando usa `concurrently` para levantar los servicios:
 
-curl -X GET http://localhost:3000/flights -H "Authorization: Bearer TU_TOKEN"
-📌 Reservar un vuelo (ejemplo con ID = 1)
+```json
+"scripts": {
+  "start": "concurrently \"npm run dev --prefix auth-service\" \"npm run dev --prefix vuelos-service\" \"npm run dev --prefix reservas-service\" \"npm run dev --prefix api-gateway-back\""
+}
+```
 
-curl -X POST http://localhost:3000/reserve -H "Authorization: Bearer TU_TOKEN" -H "Content-Type: application/json" -d '{"flightId":1}'
-5️⃣ Probar la Interfaz Web
-📌 Abrir el archivo index.html en el navegador y probar las siguientes funcionalidades:
+Cada servicio corre en su propio puerto:
+- Auth: `3001`
+- Vuelos: `3003`
+- Reservas: `3002`
 
-✅ Iniciar sesión con cualquier usuario.
-✅ Ver los vuelos disponibles.
-✅ Reservar un vuelo.
-✅ Consultar las reservas realizadas.
-✅ Ver recomendaciones personalizadas.
+## 🔐 Pruebas con curl o Postman
+
+### 1. Login (obtener token)
+
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user1", "password":"password1"}'
+```
+
+### 2. Consultar vuelos (con token)
+
+```bash
+curl -X GET http://localhost:3000/vuelos \
+  -H "Authorization: Bearer TU_TOKEN"
+```
+
+### 3. Crear reserva (con token)
+
+```bash
+curl -X POST http://localhost:3000/reservas \
+  -H "Authorization: Bearer TU_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userId": 1,
+    "fecha": "2024-04-06",
+    "vueloId": 1
+  }'
+```
