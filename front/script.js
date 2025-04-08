@@ -1,28 +1,32 @@
 // URL base del API Gateway
 const API_BASE_URL = 'http://localhost:3000';
-
+const morgan = require('morgan');
+app.use(morgan('dev'));
 // Función para iniciar sesión
 async function login() {
     const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value; // Agregar password
+    const password = document.getElementById('password').value;
+  
     try {
-        const response = await fetch(`${API_BASE_URL}/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ username, password }) // Enviar username y password
-        });
-        const data = await response.json();
-        if (response.ok) {
-            document.getElementById('tokenMessage').innerText = `Token: ${data.token}`;
-            localStorage.setItem('token', data.token);
-        } else {
-            document.getElementById('tokenMessage').innerText = data.message;
-        }
+      const response = await fetch('http://localhost:3000/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username, password })
+      });
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        document.getElementById('tokenMessage').textContent = '✅ Login exitoso';
+      } else {
+        document.getElementById('tokenMessage').textContent = `❌ ${data.message || 'Error al iniciar sesión'}`;
+      }
     } catch (error) {
-        console.error('Error al iniciar sesión:', error);
+      document.getElementById('tokenMessage').textContent = '❌ Error en la solicitud';
     }
-}
-
+  }
+  
 // Función para obtener vuelos
 async function getFlights() {
     try {

@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "concurrently \"npm run dev --prefix auth-service\" \"npm run dev --prefix vuelos-service\" \"npm run dev --prefix reservas-service\" \"npm run dev --prefix api-gateway-back\""
+    "start": "concurrently \"npm run dev --prefix auth-service\" \"npm run dev --prefix vuelos-service\" \"npm run dev --prefix reservas-service\" \"npm run dev --prefix api-gateway\""
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.9"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
@@ -15,6 +16,7 @@
     "express-validator": "^7.2.1",
     "http-proxy-middleware": "^3.0.3",
     "jsonwebtoken": "^9.0.2",
+    "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1",
     "yamljs": "^0.3.0"
   }

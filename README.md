@@ -65,3 +65,9 @@ curl -X POST http://localhost:3000/reservas \
     "vueloId": 1
   }'
 ```
+### 4. ver reservca creada (con token)
+```bash
+curl -X POST http://localhost:3000/reservas \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user1", "password":"password1"}'
+```
