@@ -176,5 +176,23 @@
     "userId": 1,
     "vueloId": "101",
     "fecha": "2025-04-06"
+  },
+  {
+    "id": 24,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06"
+  },
+  {
+    "id": 25,
+    "userId": 1,
+    "vueloId": 101,
+    "fecha": "2025-04-06"
+  },
+  {
+    "id": 26,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06"
   }
 ]
