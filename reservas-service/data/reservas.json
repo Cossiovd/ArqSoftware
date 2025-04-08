@@ -16,5 +16,165 @@
     "userId": 1,
     "vueloId": 1,
     "fecha": "2024-04-06"
+  },
+  {
+    "id": 4,
+    "userId": 1,
+    "vueloId": 1,
+    "fecha": "2024-04-06"
+  },
+  {
+    "id": 5,
+    "userId": 1,
+    "vueloId": 2,
+    "fecha": "2024-04-08"
+  },
+  {
+    "id": 6,
+    "userId": 1,
+    "vueloId": 1,
+    "fecha": "2024-04-05"
+  },
+  {
+    "id": 7,
+    "userId": 1,
+    "vueloId": 102,
+    "fecha": "2024-04-05"
+  },
+  {
+    "id": 8,
+    "userId": 1,
+    "vueloId": 1,
+    "fecha": "2024-04-05"
+  },
+  {
+    "id": 9,
+    "userId": 1,
+    "vueloId": 102,
+    "fecha": "2025-04-07"
+  },
+  {
+    "id": 10,
+    "userId": 1,
+    "vueloId": 10,
+    "fecha": "2025-04-07"
+  },
+  {
+    "id": 11,
+    "userId": 1,
+    "vueloId": 10,
+    "fecha": "2025-04-01"
+  },
+  {
+    "id": 12,
+    "userId": 1,
+    "vueloId": 101,
+    "fecha": "2024-04-05"
+  },
+  {
+    "id": 13,
+    "userId": 2,
+    "vueloId": 101,
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 14,
+    "userId": 1,
+    "vueloId": 101,
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 15,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 16,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 17,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 18,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 19,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 20,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06",
+    "vuelo": {
+      "origen": "Ciudad A",
+      "destino": "Ciudad B",
+      "fecha": "2025-04-06"
+    }
+  },
+  {
+    "id": 21,
+    "userId": 4,
+    "vueloId": "101",
+    "fecha": "2025-04-06"
+  },
+  {
+    "id": 22,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06"
+  },
+  {
+    "id": 23,
+    "userId": 1,
+    "vueloId": "101",
+    "fecha": "2025-04-06"
   }
 ]

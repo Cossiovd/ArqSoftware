@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const { check, validationResult } = require('express-validator');
+const vuelosPath = path.join(__dirname, '../data/vuelos.json');
 
 // Controlador para el microservicio de vuelos
 exports.getAllVuelos = (req, res) => {
@@ -46,3 +47,19 @@ exports.validateVuelo = [
     next();
   }
 ];
+exports.getVueloById = (req, res) => {
+  try {
+    const id = parseInt(req.params.id);
+    const vuelos = JSON.parse(fs.readFileSync(vuelosPath, 'utf-8'));
+    const vuelo = vuelos.find(v => v.id === id);
+
+    if (!vuelo) {
+      return res.status(404).json({ message: 'Vuelo no encontrado' });
+    }
+
+    return res.status(200).json(vuelo);
+  } catch (error) {
+    console.error('❌ Error en getVueloById:', error.message);
+    return res.status(500).json({ message: 'Error interno en vuelos', error: error.message });
+  }
+};

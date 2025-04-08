@@ -1,19 +1,47 @@
-// Punto de entrada para el microservicio de reservas
 const express = require('express');
-const { authenticateToken } = require('../auth-service/middleware/authMiddleware');
 const reservasRoutes = require('./routes/reservas');
+const swaggerJsdoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const morgan = require('morgan');
+const authMiddleware = require('./middleware/authMiddleware.js');
 
 const app = express();
 app.use(express.json());
+app.use(morgan('dev'));
+app.use('/reservas', authMiddleware.authenticateToken, reservasRoutes);
 
-const SECRET_KEY = 'your_secret_key'; // Asegúrate de que coincida con el auth-service
+// Configuración Swagger solo para este microservicio
+const swaggerSpec = swaggerJsdoc({
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Reservas Service - VuelaMás',
+      version: '1.0.0',
+      description: 'Documentación del microservicio de reservas',
+    },
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: 'http',
+          scheme: 'bearer',
+          bearerFormat: 'JWT'
+        }
+      }
+    },
+    security: [ // 👈 ESTO lo hace obligatorio globalmente
+      {
+        bearerAuth: []
+      }
+    ]
+  },
+  apis: ['./routes/*.js']
+});
 
-// Aplicar el middleware a todas las rutas
-app.use(authenticateToken);
+// Swagger UI local
+app.use('/', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
-app.use('/reservas', reservasRoutes);
-
+// Puerto
 const PORT = process.env.PORT || 3002;
 app.listen(PORT, () => {
-  console.log(`Reservas service running on port ${PORT}`);
+  console.log(`✅ Reservas service y Swagger UI corriendo en http://localhost:${PORT}`);
 });

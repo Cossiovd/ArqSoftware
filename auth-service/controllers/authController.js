@@ -44,7 +44,15 @@ exports.login = (req, res) => {
   // Generar token JWT
   const token = jwt.sign({ id: user.id, username: user.username }, SECRET_KEY, { expiresIn: '1h' });
 
-  res.json({ message: 'Login exitoso', token });
+  // ✅ Enviar también los datos del usuario
+  res.json({
+    message: 'Login exitoso',
+    token,
+    user: {
+      id: user.id,
+      username: user.username
+    }
+  });
 };
 
 exports.register = (req, res) => {

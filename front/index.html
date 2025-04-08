@@ -1,51 +1,46 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agencia de Viajes</title>
-        <link rel="stylesheet" href="styles.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    </head>
-    
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencia de Viajes</title>
+</head>
 <body>
-    <h1>Agencia de Viajes - VuelaMás</h1>
+  <h1>Agencia de Viajes - VuelaMás</h1>
 
     <div>
-        <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
+        <h2>Iniciar Sesión</h2>
         <input type="text" id="username" placeholder="Usuario">
         <button onclick="login()">Login</button>
         <p id="tokenMessage"></p>
     </div>
 
     <div>
-        <h2><i class="fas fa-plane-departure"></i> Consultar Vuelos Disponibles</h2>
+        <h2>Consultar Vuelos Disponibles</h2>
         <button onclick="getFlights()">Ver Vuelos</button>
         <ul id="flightsList"></ul>
     </div>
 
     <div>
-        <h2><i class="fas fa-ticket-alt"></i> Reservar Vuelo</h2>
-
+        <h2>Reservar Vuelo</h2>
         <input type="number" id="flightId" placeholder="ID del vuelo">
         <button onclick="reserveFlight()">Reservar</button>
         <p id="reservationMessage"></p>
-
     </div>
 
     <div>
-    <h2><i class="fas fa-clipboard-list"></i> Mis Reservas</h2>
+        <h2>Mis Reservas</h2>
         <button onclick="getReservations()">Ver Mis Reservas</button>
         <ul id="reservationsList"></ul>
     </div>
 
     <div>
         <h2>Recomendaciones</h2>
-        <h2><i class="fas fa-lightbulb"></i> Ver Recomendaciones</h2>
+        <button onclick="getRecommendations()">Ver Recomendaciones</button>
         <ul id="recommendationsList"></ul>
     </div>
-    <!-- Scripts-->
-    <script src="scripts.js"></script>
+
+    <script src="script.js"></script>
 </body>
 <div id="loader" style="display: none;">
     <div class="spinner"></div>
