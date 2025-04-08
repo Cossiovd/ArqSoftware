@@ -1,64 +1,49 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Agencia de Viajes - VuelaMás</title>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agencia de Viajes</title>
 </head>
-
 <body>
   <h1>Agencia de Viajes - VuelaMás</h1>
 
-  <!-- Login -->
-  <div>
-    <h2><i class="fas fa-sign-in-alt"></i> Iniciar Sesión</h2>
-    <input type="text" id="username" placeholder="Usuario" />
-    <input type="password" id="password" placeholder="Contraseña" />
-    <button id="loginBtn">Login</button>
-    <p id="tokenMessage"></p>
-  </div>
+    <div>
+        <h2>Iniciar Sesión</h2>
+        <input type="text" id="username" placeholder="Usuario">
+        <button onclick="login()">Login</button>
+        <p id="tokenMessage"></p>
+    </div>
 
-  <!-- Vuelos -->
-  <div>
-    <h2><i class="fas fa-plane-departure"></i> Consultar Vuelos Disponibles</h2>
-    <button id="getFlightsBtn">Ver Vuelos</button>
-    <ul id="flightsList"></ul>
-  </div>
+    <div>
+        <h2>Consultar Vuelos Disponibles</h2>
+        <button onclick="getFlights()">Ver Vuelos</button>
+        <ul id="flightsList"></ul>
+    </div>
 
-  <!-- Reservar Vuelo -->
-  <div>
-    <h2><i class="fas fa-ticket-alt"></i> Reservar Vuelo</h2>
-    <input type="number" id="flightId" placeholder="ID del vuelo" />
-    <input type="date" id="flightDate" placeholder="Fecha del vuelo" />
-    <button id="reserveBtn">Reservar</button>
-    <p id="reservationMessage"></p>
-  </div>
+    <div>
+        <h2>Reservar Vuelo</h2>
+        <input type="number" id="flightId" placeholder="ID del vuelo">
+        <button onclick="reserveFlight()">Reservar</button>
+        <p id="reservationMessage"></p>
+    </div>
 
-  <!-- Ver Reservas -->
-  <div>
-    <h2><i class="fas fa-clipboard-list"></i> Mis Reservas</h2>
-    <button id="getReservationsBtn">Ver Mis Reservas</button>
-    <ul id="reservationsList"></ul>
-  </div>
+    <div>
+        <h2>Mis Reservas</h2>
+        <button onclick="getReservations()">Ver Mis Reservas</button>
+        <ul id="reservationsList"></ul>
+    </div>
 
-  <!-- Recomendaciones (por ahora estática) -->
-  <div>
-    <h2><i class="fas fa-lightbulb"></i> Recomendaciones</h2>
-    <ul id="recommendationsList">
-      <li>Compra con anticipación para mejores precios.</li>
-      <li>Verifica siempre la fecha del vuelo antes de reservar.</li>
-      <li>Guarda tu número de reserva por seguridad.</li>
-    </ul>
-  </div>
+    <div>
+        <h2>Recomendaciones</h2>
+        <button onclick="getRecommendations()">Ver Recomendaciones</button>
+        <ul id="recommendationsList"></ul>
+    </div>
 
-  <!-- Loader (opcional) -->
-  <div id="loader" style="display: none;">
+    <script src="script.js"></script>
+</body>
+<div id="loader" style="display: none;">
     <div class="spinner"></div>
   </div>
-
-  <!-- Scripts -->
-  <script src="script.js"></script>
-</body>
+  
 </html>
