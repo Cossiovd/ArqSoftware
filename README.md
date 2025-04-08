@@ -120,6 +120,13 @@ Puedes realizar pruebas desde:
   - Reservas: [http://localhost:3002](http://localhost:3002)
   - Vuelos: [http://localhost:3003](http://localhost:3003)
 
+### 1. Login (obtener token)
+```bash
+curl -X POST http://localhost:3000/auth/login \
+  -H "Content-Type: application/json" \
+  -d '{"username":"user1", "password":"password1"}'
+```
+
 ### 2. Consultar vuelos (con token)
 
 ```bash
