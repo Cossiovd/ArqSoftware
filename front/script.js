@@ -1,6 +1,5 @@
 const BASE_URL = 'http://localhost:3000';
 
-localStorage.clear();
 document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('loginBtn').addEventListener('click', login);
   document.getElementById('getFlightsBtn').addEventListener('click', getFlights);

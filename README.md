@@ -109,38 +109,44 @@ Permite:
 ]
 ```
 ---
-## 🔐 Pruebas con curl o Postman
+## 🔐 Pruebas con Postman o Swagger UI
 
-### 1. Login (obtener token)
-```bash
-curl -X POST http://localhost:3000/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"username":"user1", "password":"password1"}'
-```
+Puedes realizar pruebas desde:
+
+- **Postman**
+- **Swagger UI global:** [http://localhost:3000/api-docs](http://localhost:3000/api-docs)
+- **Swagger UI por microservicio:**
+  - Auth: [http://localhost:3001](http://localhost:3001)
+  - Reservas: [http://localhost:3002](http://localhost:3002)
+  - Vuelos: [http://localhost:3003](http://localhost:3003)
 
 ### 2. Consultar vuelos (con token)
+
 ```bash
 curl -X GET http://localhost:3000/vuelos \
   -H "Authorization: Bearer TU_TOKEN"
 ```
 
 ### 3. Crear reserva (con token)
+
 ```bash
 curl -X POST http://localhost:3000/reservas \
   -H "Authorization: Bearer TU_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{
     "userId": 1,
-    "fecha": "2025-04-06",
-    "vueloId": 101
+    "fecha": "2024-04-06",
+    "vueloId": 1
   }'
 ```
 
 ### 4. Ver reservas creadas (con token)
+
 ```bash
 curl -X GET http://localhost:3000/reservas \
   -H "Authorization: Bearer TU_TOKEN"
 ```
+
 ---
 
 
